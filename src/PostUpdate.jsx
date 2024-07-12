@@ -23,7 +23,7 @@ export function PostUpdate(props) {
   const handlingPostDelete = () => {
     event.preventDefault();
     console.log("sending destroy post request");
-    props.onPostDelete(props.post.id);
+    props.onPostDelete(props.post.id); //post.id passed in props to handlePostDelete in Content
   }
 
   return (

@@ -28,8 +28,13 @@ export function Content() {
       console.error("There was an error fetching the posts!", error);
     });
   }
-  const handleDeletePost = () => {
-    console.log("receiving delete request")
+  const handleDeletePost = (post_id) => {
+    console.log("receiving delete request");
+    axios.delete(`http://localhost:3000/posts/14.json`).then(response => {
+      console.log(response.data);
+      setPosts(posts.filter((post) => post.id !== post_id));
+      handleClosePostUpdateModal();
+    })
   }
   
   const handleCreateNewPost = (theParams, successCallback) => {
