@@ -2,7 +2,8 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { PostsIndex } from "./PostIndex"
 import { PostShow } from "./PostShow"
-import { Modal } from "./Modal"
+import { PostNew } from "./PostNew"
+import { ModalPost } from "./ModalPost"
 
 
 export function Content() {
@@ -38,10 +39,10 @@ export function Content() {
     <main>
       <h1>The Platonic Platypus</h1>
       <PostsIndex posts={posts} onShowPost={handleShowSinglePost}/>
-      <Modal show={isPostShowVisible} onClose={handleCloseModal}>
+      <ModalPost show={isPostShowVisible} onClose={handleCloseModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
-      </Modal>
+      </ModalPost>
     </main>
   )
 }
