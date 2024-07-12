@@ -4,6 +4,8 @@ import { PostsIndex } from "./PostIndex"
 import { PostShow } from "./PostShow"
 import { PostNew } from "./PostNew"
 import { PostUpdate } from "./PostUpdate"
+import { Signup } from "./SignUp"
+import { Login } from "./Login"
 import { ModalPost } from "./ModalPost"
 import { ModalPostUpdate } from "./ModalPostUpdate"
 
@@ -57,6 +59,9 @@ export function Content() {
       console.log(response.data)
       setSystemData(response.data)
     })
+    .catch(error => {
+      console.error("There was an error retrieving Systems data", error)
+    })
   }
   console.log("System Data Verification", systemData)
 
@@ -67,6 +72,9 @@ export function Content() {
     .then(response => {
       console.log(response.data);
       setGenreData(response.data);
+    })
+    .catch(error => {
+      console.error("There was an error retrieving Genres data", error)
     })
   }
   console.log("Genre Data Verification", genreData)
@@ -99,6 +107,8 @@ export function Content() {
 
   return (
     <main>
+      <Signup/>
+      <Login />
       <PostNew onCreateNewPost={handleCreateNewPost}/>
       <h1>The Platonic Platypus</h1>
       <PostsIndex posts={posts} 
