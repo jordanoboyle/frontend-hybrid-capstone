@@ -13,6 +13,9 @@ export function Content() {
   const [isPostShowVisible, setIsPostShowVisible] = useState(false);
   const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState({})
+  const [systemData, setSystemData] = useState([])
+  const [genreData, setGenreData] = useState([])
+  
 
 
   const handleIndexPosts = () => {
@@ -26,6 +29,22 @@ export function Content() {
     });
   }
   
+  const handleCreateNewPost = (theParams, successCallback) => {
+    console.log("creating new post");
+    axios.post("http://localhost:3000/posts.json", theParams)
+    .then(response => {
+      console.log(response.data);
+      setPosts([...posts, response.data]); //resets the state with the new post
+      successCallback()
+    })
+    .catch(error => {
+      console.error("There was an error in creating article", error)
+    })
+  }
+  //Build system data request here (prop pass)
+
+  //Build genre data request here (prop pass)
+
   //PostShow Modal read article
   const handleClosePostShowModal = () => {
     console.log("closing modal");
@@ -51,8 +70,11 @@ export function Content() {
 
   return (
     <main>
+      <PostNew onCreateNewPost={handleCreateNewPost}/>
       <h1>The Platonic Platypus</h1>
-      <PostsIndex posts={posts} onShowPost={handleShowSinglePost} onShowUpdatePost={handleShowPostUpdateModal}/>
+      <PostsIndex posts={posts} 
+      onShowPost={handleShowSinglePost} 
+      onShowUpdatePost={handleShowPostUpdateModal}/>
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
