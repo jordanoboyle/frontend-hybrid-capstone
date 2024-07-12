@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { PostsIndex } from "./PostIndex"
+import { PostShow } from "./PostShow"
 import { Modal } from "./Modal"
 
 
@@ -25,9 +26,10 @@ export function Content() {
     console.log("closing modal");
     setIsPostShowVisible(false)
   }
-  const handleShowSinglePost = (bike) => {
+  const handleShowSinglePost = (post) => {
     console.log("showing single post through modal");
     setIsPostShowVisible(true);
+    setCurrentPost(post);
   }
 
   useEffect(handleIndexPosts, [])
@@ -38,7 +40,7 @@ export function Content() {
       <PostsIndex posts={posts} onShowPost={handleShowSinglePost}/>
       <Modal show={isPostShowVisible} onClose={handleCloseModal}>
       Think about this like html content
-      
+        <PostShow post={currentPost}/>
       </Modal>
     </main>
   )
