@@ -3,12 +3,15 @@ import axios from "axios"
 import { PostsIndex } from "./PostIndex"
 import { PostShow } from "./PostShow"
 import { PostNew } from "./PostNew"
+import { PostUpdate } from "./PostUpdate"
 import { ModalPost } from "./ModalPost"
+import { ModalPostUpdate } from "./ModalPostUpdate"
 
 
 export function Content() {
   const [posts, setPosts] = useState([])
   const [isPostShowVisible, setIsPostShowVisible] = useState(false);
+  const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState({})
 
 
@@ -22,8 +25,9 @@ export function Content() {
       console.error("There was an error fetching the posts!", error);
     });
   }
-
-  const handleCloseModal = () => {
+  
+  //PostShow Modal read article
+  const handleClosePostShowModal = () => {
     console.log("closing modal");
     setIsPostShowVisible(false)
   }
@@ -32,17 +36,30 @@ export function Content() {
     setIsPostShowVisible(true);
     setCurrentPost(post);
   }
-
+  
+  //PostUpdate Modal form to update article
+  const handleShowPostUpdateModal = (post) => {
+    console.log("opening Post Update modal");
+    setIsPostUpdateVisible(true);
+    setCurrentPost(post);
+  }
+  const handleClosePostUpdateModal = () => {
+    setIsPostUpdateVisible(false)
+  }
   useEffect(handleIndexPosts, [])
+
 
   return (
     <main>
       <h1>The Platonic Platypus</h1>
-      <PostsIndex posts={posts} onShowPost={handleShowSinglePost}/>
-      <ModalPost show={isPostShowVisible} onClose={handleCloseModal}>
+      <PostsIndex posts={posts} onShowPost={handleShowSinglePost} onShowUpdatePost={handleShowPostUpdateModal}/>
+      <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
       </ModalPost>
+      <ModalPostUpdate show={isPostUpdateVisible} onClose={handleClosePostUpdateModal}>
+        <PostUpdate post={currentPost}/>
+      </ModalPostUpdate>
     </main>
   )
 }

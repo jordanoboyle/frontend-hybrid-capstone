@@ -27,7 +27,7 @@ export function PostsIndex(props) {
           <p>Author: {post.user.first_name + " " + post.user.last_name}</p>
           <p> PlatonicTag: {post.user.username}</p>
           <p><button onClick={() => props.onShowPost(post)}> Read Article</button> </p>
-          <button>Update Article</button>
+          <button onClick={() => props.onShowUpdatePost(post)}>Update Article</button>
           <hr/>
         </div>
         

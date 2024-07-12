@@ -7,7 +7,8 @@ export function Footer() {
     color: "#fff", //setting color text to white
     position: "fixed",  //fixes footer to the bottom
     bottom: 0,  //alligns with bottom
-    width: "100%" // entire width of view port
+    width: "100%", // entire width of view port
+    pointerEvents: "none" // makes my footer click through
   }
   return (
     <footer style={footerStyle}>
