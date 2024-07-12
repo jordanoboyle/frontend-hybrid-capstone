@@ -50,8 +50,27 @@ export function Content() {
     })
   }
   //Build system data request here (prop pass)
+  const getSystemData = () => {
+    console.log("getting System data");
+    axios.get("http://localhost:3000/systems.json")
+    .then(response => {
+      console.log(response.data)
+      setSystemData(response.data)
+    })
+  }
+  console.log("System Data Verification", systemData)
 
   //Build genre data request here (prop pass)
+  const getGenreData = () => {
+    console.log("getting genre data");
+    axios.get("http://localhost:3000/genres.json")
+    .then(response => {
+      console.log(response.data);
+      setGenreData(response.data);
+    })
+  }
+  console.log("Genre Data Verification", genreData)
+
 
   //PostShow Modal read article
   const handleClosePostShowModal = () => {
@@ -71,9 +90,11 @@ export function Content() {
     setCurrentPost(post);
   }
   const handleClosePostUpdateModal = () => {
-    setIsPostUpdateVisible(false)
+    setIsPostUpdateVisible(false);
   }
-  useEffect(handleIndexPosts, [])
+  useEffect(handleIndexPosts, []);
+  useEffect(getSystemData, []);
+  useEffect(getGenreData, [])
 
 
   return (
