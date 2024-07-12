@@ -20,6 +20,10 @@ export function PostNew(props) {
           <input name="title" type="text"/>
         </div>
         <div>
+          Temp User ID Input:
+          <input name="user_id" type="integer"/>
+        </div>
+        <div>
           Game Title (not required):
           <input name="game_title" type="text"/>
         </div>
