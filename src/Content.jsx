@@ -6,6 +6,7 @@ import { PostNew } from "./PostNew"
 import { PostUpdate } from "./PostUpdate"
 import { Signup } from "./SignUp"
 import { Login } from "./Login"
+import { LogoutLink } from "./LogoutLink"
 import { ModalPost } from "./ModalPost"
 import { ModalPostUpdate } from "./ModalPostUpdate"
 
@@ -107,8 +108,10 @@ export function Content() {
 
   return (
     <main>
+      
       <Signup/>
       <Login />
+      <LogoutLink/>
       <PostNew onCreateNewPost={handleCreateNewPost}/>
       <h1>The Platonic Platypus</h1>
       <PostsIndex posts={posts} 
