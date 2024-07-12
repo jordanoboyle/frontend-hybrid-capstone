@@ -4,6 +4,9 @@ import { PostsIndex } from "./PostIndex"
 import { PostShow } from "./PostShow"
 import { PostNew } from "./PostNew"
 import { PostUpdate } from "./PostUpdate"
+import { Signup } from "./SignUp"
+import { Login } from "./Login"
+import { LogoutLink } from "./LogoutLink"
 import { ModalPost } from "./ModalPost"
 import { ModalPostUpdate } from "./ModalPostUpdate"
 
@@ -50,8 +53,33 @@ export function Content() {
     })
   }
   //Build system data request here (prop pass)
+  const getSystemData = () => {
+    console.log("getting System data");
+    axios.get("http://localhost:3000/systems.json")
+    .then(response => {
+      console.log(response.data)
+      setSystemData(response.data)
+    })
+    .catch(error => {
+      console.error("There was an error retrieving Systems data", error)
+    })
+  }
+  console.log("System Data Verification", systemData)
 
   //Build genre data request here (prop pass)
+  const getGenreData = () => {
+    console.log("getting genre data");
+    axios.get("http://localhost:3000/genres.json")
+    .then(response => {
+      console.log(response.data);
+      setGenreData(response.data);
+    })
+    .catch(error => {
+      console.error("There was an error retrieving Genres data", error)
+    })
+  }
+  console.log("Genre Data Verification", genreData)
+
 
   //PostShow Modal read article
   const handleClosePostShowModal = () => {
@@ -71,13 +99,19 @@ export function Content() {
     setCurrentPost(post);
   }
   const handleClosePostUpdateModal = () => {
-    setIsPostUpdateVisible(false)
+    setIsPostUpdateVisible(false);
   }
-  useEffect(handleIndexPosts, [])
+  useEffect(handleIndexPosts, []);
+  useEffect(getSystemData, []);
+  useEffect(getGenreData, [])
 
 
   return (
     <main>
+      
+      <Signup/>
+      <Login />
+      <LogoutLink/>
       <PostNew onCreateNewPost={handleCreateNewPost}/>
       <h1>The Platonic Platypus</h1>
       <PostsIndex posts={posts} 
