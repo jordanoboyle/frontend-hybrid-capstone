@@ -28,6 +28,9 @@ export function Content() {
       console.error("There was an error fetching the posts!", error);
     });
   }
+  const handleDeletePost = () => {
+    console.log("receiving delete request")
+  }
   
   const handleCreateNewPost = (theParams, successCallback) => {
     console.log("creating new post");
@@ -80,7 +83,7 @@ export function Content() {
         <PostShow post={currentPost}/>
       </ModalPost>
       <ModalPostUpdate show={isPostUpdateVisible} onClose={handleClosePostUpdateModal}>
-        <PostUpdate post={currentPost}/>
+        <PostUpdate post={currentPost} onPostDelete={handleDeletePost}/>
       </ModalPostUpdate>
     </main>
   )

@@ -19,7 +19,12 @@ export function PostUpdate(props) {
       setError("There was an error on the update. Please try again later.")
     })
   }
-  console.log(props.post)
+  // console.log(props.post) //For purposes of seeing data structures
+  const handlingPostDelete = () => {
+    event.preventDefault();
+    console.log("sending destroy post request");
+    props.onPostDelete(props.post.id);
+  }
 
   return (
     <div>
@@ -44,6 +49,9 @@ export function PostUpdate(props) {
           {error}
         </div>
       )}
+      <div style={formStyle}>
+        <button style={buttonStyle} onClick={handlingPostDelete}>Remove Article</button>
+      </div>
     </div>
   );
 };
@@ -53,6 +61,8 @@ const formStyle = {
   flexDirection: 'column',
   alignItems: 'center',
 };
+
+
 
 const formGroupStyle = {
   marginBottom: '15px',
@@ -86,6 +96,8 @@ const textareaStyle = {
 
 const buttonStyle = {
   padding: '10px 20px',
+  paddingTop: "10px",
+  marginTop: "10px",
   backgroundColor: '#007bff',
   color: '#fff',
   border: 'none',

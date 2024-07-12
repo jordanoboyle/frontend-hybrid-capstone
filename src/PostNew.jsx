@@ -14,6 +14,7 @@ export function PostNew(props) {
       <h1>
         Want to write about something? We have you covered!
       </h1>
+      <p>(functional needs routing and more intricate work)</p>
       <form onSubmit={handlePostSubmit}>
         <div>
           Article Title:
