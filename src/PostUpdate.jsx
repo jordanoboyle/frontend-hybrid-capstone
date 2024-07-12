@@ -21,20 +21,74 @@ export function PostUpdate(props) {
   }
   console.log(props.post)
 
-  return(
+  return (
     <div>
-      <h1>Update your toughts and opinios here:</h1>
-      <form onSubmit={handlingSubmitPostUpdate}>
-        <div>Title:<input name="title" type="text" defaultValue={props.post.title}/></div>
-        <div>Game:<input name="game_title" type="text" defaultValue={props.post.game_title}/></div>
-        <div>Article:<input name="body" type="text" defaultValue={props.post.body}/></div>
-        <button type="submit">Update The Article</button>
+      <h1>Update your thoughts and opinions here:</h1>
+      <form onSubmit={handlingSubmitPostUpdate} style={formStyle}>
+        <div style={formGroupStyle}>
+          <label style={labelStyle}>Title:</label>
+          <input name="title" type="text" defaultValue={props.post.title} style={inputStyle} />
+        </div>
+        <div style={formGroupStyle}>
+          <label style={labelStyle}>Game:</label>
+          <input name="game_title" type="text" defaultValue={props.post.game_title} style={inputStyle} />
+        </div>
+        <div style={formGroupStyle}>
+          <label style={labelStyle}>Article:</label>
+          <textarea name="body" defaultValue={props.post.body} style={textareaStyle}></textarea>
+        </div>
+        <button type="submit" style={buttonStyle}>Update The Article</button>
       </form>
-        {error && (
-          <div style={{color: 'red'}}>
-            {error}
-          </div>
-        )}
+      {error && (
+        <div style={{ color: 'red' }}>
+          {error}
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
+
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
+const formGroupStyle = {
+  marginBottom: '15px',
+  width: '100%',
+};
+
+const labelStyle = {
+  display: 'block',
+  marginBottom: '5px',
+  fontWeight: 'bold',
+};
+
+const inputStyle = {
+  width: '100%',
+  padding: '10px',
+  boxSizing: 'border-box',
+  borderRadius: '20px',
+  border: '1px solid #ccc',
+};
+
+const textareaStyle = {
+  width: '100%',
+  height: '150px',
+  padding: '10px',
+  boxSizing: 'border-box',
+  borderRadius: '20px',
+  border: '1px solid #ccc',
+  resize: 'vertical',
+  overflowY: "auto"  //This is what allows for the vertical scrolling(basically overflow the y, you can scroll)
+};
+
+const buttonStyle = {
+  padding: '10px 20px',
+  backgroundColor: '#007bff',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '20px',
+  cursor: 'pointer',
+};
