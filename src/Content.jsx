@@ -4,11 +4,13 @@ import { PostsIndex } from "./PostIndex"
 import { PostShow } from "./PostShow"
 import { PostNew } from "./PostNew"
 import { PostUpdate } from "./PostUpdate"
+import { FAQIndex } from "./FAQIndex"
 import { Signup } from "./SignUp"
 import { Login } from "./Login"
 import { LogoutLink } from "./LogoutLink"
 import { ModalPost } from "./ModalPost"
 import { ModalPostUpdate } from "./ModalPostUpdate"
+import { Routes, Route } from "react-router-dom"
 
 
 export function Content() {
@@ -40,18 +42,7 @@ export function Content() {
     })
   }
   
-  const handleCreateNewPost = (theParams, successCallback) => {
-    console.log("creating new post");
-    axios.post("http://localhost:3000/posts.json", theParams)
-    .then(response => {
-      console.log(response.data);
-      setPosts([...posts, response.data]); //resets the state with the new post
-      successCallback()
-    })
-    .catch(error => {
-      console.error("There was an error in creating article", error)
-    })
-  }
+
   //Build system data request here (prop pass)
   const getSystemData = () => {
     console.log("getting System data");
@@ -108,15 +99,16 @@ export function Content() {
 
   return (
     <main>
-      
-      <Signup/>
-      <Login />
-      <LogoutLink/>
-      <PostNew onCreateNewPost={handleCreateNewPost}/>
-      <h1>The Platonic Platypus</h1>
-      <PostsIndex posts={posts} 
+        <h1>The Platonic Platypus</h1>
+        <a href="/post/new">NewPost</a>
+      <Routes>
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/post/new" element={<PostNew />} />
+        <Route path="/contributions" element={<PostsIndex posts={posts} 
       onShowPost={handleShowSinglePost} 
-      onShowUpdatePost={handleShowPostUpdateModal}/>
+      onShowUpdatePost={handleShowPostUpdateModal}/>}/>
+      </Routes>
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
