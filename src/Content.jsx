@@ -18,11 +18,12 @@ export function Content() {
   const [isPostShowVisible, setIsPostShowVisible] = useState(false);
   const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState({})
+  const [faqs, setFaqs] = useState([])
   const [systemData, setSystemData] = useState([])
   const [genreData, setGenreData] = useState([])
   
 
-
+  //## Posts Related
   const handleIndexPosts = () => {
     console.log("getting the posts");
     axios.get("http://localhost:3000/posts.json").then(response => {
@@ -33,6 +34,7 @@ export function Content() {
       console.error("There was an error fetching the posts!", error);
     });
   }
+  //Delete Blog Post
   const handleDeletePost = (post_id) => {
     console.log("receiving delete request");
     axios.delete(`http://localhost:3000/posts/14.json`).then(response => {
@@ -41,7 +43,42 @@ export function Content() {
       handleClosePostUpdateModal();
     })
   }
+
+  //PostShow Modal read article
+  const handleClosePostShowModal = () => {
+    console.log("closing modal");
+    setIsPostShowVisible(false)
+  }
+  const handleShowSinglePost = (post) => {
+    console.log("showing single post through modal");
+    setIsPostShowVisible(true);
+    setCurrentPost(post);
+  }
+
+  //PostUpdate Modal form to update article
+  const handleShowPostUpdateModal = (post) => {
+    console.log("opening Post Update modal");
+    setIsPostUpdateVisible(true);
+    setCurrentPost(post);
+  }
+  const handleClosePostUpdateModal = () => {
+    setIsPostUpdateVisible(false);
+  }
   
+  //##FAQ Related
+  const handleIndexFAQs = () => {
+    console.log("getting the FAQs");
+    axios.get("http://localhost:3000/faqs.json").then(response => {
+      console.log(response.data);
+      setFaqs(response.data);
+    })
+    .catch(error => {
+      console.error("There was an error fetching the faqs!", error);
+    });
+  }
+  console.log("This is FAQ Data", faqs)
+  
+
 
   //Build system data request here (prop pass)
   const getSystemData = () => {
@@ -55,7 +92,7 @@ export function Content() {
       console.error("There was an error retrieving Systems data", error)
     })
   }
-  console.log("System Data Verification", systemData)
+  // console.log("System Data Verification", systemData)
 
   //Build genre data request here (prop pass)
   const getGenreData = () => {
@@ -69,45 +106,30 @@ export function Content() {
       console.error("There was an error retrieving Genres data", error)
     })
   }
-  console.log("Genre Data Verification", genreData)
+  // console.log("Genre Data Verification", genreData)
 
 
-  //PostShow Modal read article
-  const handleClosePostShowModal = () => {
-    console.log("closing modal");
-    setIsPostShowVisible(false)
-  }
-  const handleShowSinglePost = (post) => {
-    console.log("showing single post through modal");
-    setIsPostShowVisible(true);
-    setCurrentPost(post);
-  }
   
-  //PostUpdate Modal form to update article
-  const handleShowPostUpdateModal = (post) => {
-    console.log("opening Post Update modal");
-    setIsPostUpdateVisible(true);
-    setCurrentPost(post);
-  }
-  const handleClosePostUpdateModal = () => {
-    setIsPostUpdateVisible(false);
-  }
   useEffect(handleIndexPosts, []);
   useEffect(getSystemData, []);
-  useEffect(getGenreData, [])
+  useEffect(getGenreData, []);
+  useEffect(handleIndexFAQs, [])
 
 
   return (
     <main>
         <h1>The Platonic Platypus</h1>
-        <a href="/post/new">NewPost</a>
+        <a href="/post/new">NewPost</a> | <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>
       <Routes>
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/post/new" element={<PostNew />} />
-        <Route path="/contributions" element={<PostsIndex posts={posts} 
-      onShowPost={handleShowSinglePost} 
-      onShowUpdatePost={handleShowPostUpdateModal}/>}/>
+        <Route path="/postIndex" element={
+          <PostsIndex posts={posts} 
+          onShowPost={handleShowSinglePost} 
+          onShowUpdatePost={handleShowPostUpdateModal}/> 
+          } />
+        <Route path="/indexFaqs" element={<FAQIndex faqs={faqs}/>} />
       </Routes>
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
