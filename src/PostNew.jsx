@@ -6,7 +6,10 @@ export function PostNew(props) {
     event.preventDefault();
     console.log("creating a new post");
     let params = new FormData (event.target);
-    props.onCreateNewPost(params, () => event.target.reset())
+    axios.post("http://localhost:3000/posts.json", params).then(response => {
+      console.log(response.data);
+    })
+    window.location.href = "/contributions"
 
   }
   return(
