@@ -30,3 +30,21 @@ export function UserProfile (props) {
     </div>
   )
 }
+
+
+//## Obsolete, but maybe useful for testing for a minute.
+// const ShowUserData = () => {
+//   const isLoggedIn = !!currentUser
+//   if (isLoggedIn) {
+//     return(
+//       <div>
+//         <p>This is the user about me below</p>
+//         <p>About Me: {currentUser.about_me}</p>
+//       </div>
+//     )
+//   } else {
+//     <div>
+//       <h1>No Current Login Status Available</h1>
+//     </div>
+//   }
+// }

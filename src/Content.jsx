@@ -137,8 +137,9 @@ export function Content() {
           onShowUpdatePost={handleShowPostUpdateModal}/> 
           } />
         <Route path="/indexFaqs" element={<FAQIndex faqs={faqs}/>} />
+        <Route path="/UserProfile" element={<UserProfile user={currentUser}/>} />
+        
       </Routes>
-      <UserProfile user={currentUser}/>
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
