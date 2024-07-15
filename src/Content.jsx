@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axios from "axios"
 import { PostsIndex } from "./PostIndex"
 import { PostShow } from "./PostShow"
@@ -8,9 +8,12 @@ import { FAQIndex } from "./FAQIndex"
 import { Signup } from "./SignUp"
 import { Login } from "./Login"
 import { LogoutLink } from "./LogoutLink"
+import { UserProfile } from "./UserProfile"
 import { ModalPost } from "./ModalPost"
 import { ModalPostUpdate } from "./ModalPostUpdate"
 import { Routes, Route } from "react-router-dom"
+import { UserContext } from "./UserContext"
+
 
 
 export function Content() {
@@ -21,8 +24,11 @@ export function Content() {
   const [faqs, setFaqs] = useState([])
   const [systemData, setSystemData] = useState([])
   const [genreData, setGenreData] = useState([])
-  
 
+  //User Data via UserContext and useContext hook
+  const {currentUser} = useContext(UserContext)
+  
+  console.log(currentUser)
   //## Posts Related
   const handleIndexPosts = () => {
     console.log("getting the posts");
@@ -114,6 +120,7 @@ export function Content() {
   useEffect(getSystemData, []);
   useEffect(getGenreData, []);
   useEffect(handleIndexFAQs, [])
+ 
 
 
   return (
@@ -131,6 +138,7 @@ export function Content() {
           } />
         <Route path="/indexFaqs" element={<FAQIndex faqs={faqs}/>} />
       </Routes>
+      <UserProfile user={currentUser}/>
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
