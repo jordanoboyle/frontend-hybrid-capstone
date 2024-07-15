@@ -8,7 +8,7 @@ export function Header() {
   console.log("from header", currentUser)
 
   const HeaderFormat = () => {
-    const isLoggedIn = !!currentUser
+    const isLoggedIn = currentUser && Object.keys(currentUser).length > 0
     if (isLoggedIn) {
       return(
         <nav>
