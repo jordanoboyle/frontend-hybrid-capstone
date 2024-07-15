@@ -5,13 +5,14 @@ import { UserContext } from "./UserContext"
 
 export function Header() {
   const {currentUser} = useContext(UserContext)
+  console.log("from header", currentUser)
 
   const HeaderFormat = () => {
     const isLoggedIn = !!currentUser
     if (isLoggedIn) {
       return(
         <nav>
-          <a href="/">Home</a> | <a href="/contributions">All Blogs, FAQs, Reviews</a> | <a href="/UserProfile">{currentUser.first_name}'s Profile Page</a> | <LogoutLink />
+          <a href="/">Home</a> | <a href="/contributions">All Blogs, FAQs, Reviews</a> | <a href="/userprofile">{currentUser.first_name}'s Profile Page</a> | <LogoutLink />
         </nav>
       )
     } else {

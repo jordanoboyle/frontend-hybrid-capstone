@@ -25,10 +25,10 @@ export function Content() {
   const [systemData, setSystemData] = useState([])
   const [genreData, setGenreData] = useState([])
 
-  //User Data via UserContext and useContext hook
-  const {currentUser} = useContext(UserContext)
-  
-  console.log(currentUser)
+  // //User Data via UserContext and useContext hook
+  // const {currentUser} = useContext(UserContext)
+  // console.log("from CONTENT", currentUser)
+
   //## Posts Related
   const handleIndexPosts = () => {
     console.log("getting the posts");
@@ -82,7 +82,7 @@ export function Content() {
       console.error("There was an error fetching the faqs!", error);
     });
   }
-  console.log("This is FAQ Data", faqs)
+  // console.log("This is FAQ Data", faqs)
   
 
 
@@ -120,12 +120,16 @@ export function Content() {
   useEffect(getSystemData, []);
   useEffect(getGenreData, []);
   useEffect(handleIndexFAQs, [])
- 
+  //User Data via UserContext and useContext hook
+  const {currentUser} = useContext(UserContext)
+  console.log("from CONTENT", currentUser)
+
 
 
   return (
     <main>
         <h1>The Platonic Platypus</h1>
+        <p>{currentUser && currentUser.first_name}</p>
         <a href="/post/new">NewPost</a> | <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>
       <Routes>
         <Route path="/signup" element={<Signup/>} />
@@ -137,9 +141,9 @@ export function Content() {
           onShowUpdatePost={handleShowPostUpdateModal}/> 
           } />
         <Route path="/indexFaqs" element={<FAQIndex faqs={faqs}/>} />
-        <Route path="/UserProfile" element={<UserProfile user={currentUser}/>} />
-        
+        <Route path="/userprofile" element={<UserProfile user={currentUser}/>} />
       </Routes>
+      {/* <UserProfile user={currentUser}/> */}
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>

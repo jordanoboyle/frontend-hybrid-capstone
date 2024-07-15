@@ -6,8 +6,8 @@ import axios from "axios";
 const UserContext = createContext(null);
 
 const UserProvider = ({children}) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [ jwt, setJWT ]               = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
+  const [ jwt, setJWT ]               = useState("");
 
   useEffect(() => {
     const storedJWT = localStorage.getItem("jwt");
