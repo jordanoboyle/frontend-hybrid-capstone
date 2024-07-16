@@ -8,7 +8,6 @@ import { FAQIndex } from "./FAQIndex"
 import { ReviewIndex } from "./ReviewIndex"
 import { Signup } from "./SignUp"
 import { Login } from "./Login"
-import { LogoutLink } from "./LogoutLink"
 import { UserProfile } from "./UserProfile"
 import { ModalPost } from "./ModalPost"
 import { ModalPostUpdate } from "./ModalPostUpdate"
@@ -141,7 +140,7 @@ export function Content() {
   return (
     <main>
         <h1>The Platonic Platypus</h1>
-        <p>{currentUser && currentUser.first_name}</p>
+        {/* <p>{currentUser && currentUser.first_name}</p> */}
         <a href="/post/new">NewPost</a> | <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a>
       <Routes>
         <Route path="/signup" element={<Signup/>} />
@@ -156,7 +155,6 @@ export function Content() {
         <Route path="/indexReviews" element={<ReviewIndex reviews={reviews} />} />
         <Route path="/userprofile" element={<UserProfile user={currentUser}/>} />
       </Routes>
-      {/* <UserProfile user={currentUser}/> */}
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
