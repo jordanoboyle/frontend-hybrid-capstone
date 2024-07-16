@@ -1,10 +1,27 @@
+import { useContext, useState } from "react"
+import axios from "axios"
+import { UserContext } from "./UserContext"
 
 
 
 export function PostShow(props) {
+  const [error, setError] = useState('')
+  const {currentUser} = useContext(UserContext);
+  // console.log("USER DATA in modal", currentUser);
 
-  const handleFavoritingPost = () => {
-    console.log("favorite this specific post")
+  const handleFavoritingPost = (event) => {
+    console.log("favorite this specific post");
+    const pID = event.currentTarget.getAttribute("data-value");
+
+    console.log("from FAV BUTTON", pID, currentUser)
+    axios.post("http://localhost:3000/favorite_posts.json", {user_id: currentUser.id, post_id: pID})
+    .then(response => {
+      console.log("Post Request Confirm", response.data)
+    })
+    .catch(error => {
+      console.log("There was an error adding to favorites", error);
+      setError("There was an error on adding to favorites. Please try again later.")
+    })
   }
 
   return(
@@ -15,7 +32,25 @@ export function PostShow(props) {
       <p> {props.post.body}</p>  {/*Body text truncated for visual purposes*/}
       <p>Author: {props.post.user.first_name + " " + props.post.user.last_name}</p>
       <p> PlatonicTag: {props.post.user.username}</p>
-      <button onClick={handleFavoritingPost}>Add To Your Favorites</button>
+      <button style={buttonStyle} onClick={handleFavoritingPost} data-value={props.post.id}>Add To Your Favorites</button>
+      {error && (
+        <div style={{color: "red"}}>
+          {error}
+        </div>
+      )}
     </div>
   )
 }
+
+const buttonStyle = {
+  padding: '10px 20px',
+  paddingTop: "10px",
+  marginTop: "10px",
+  backgroundColor: '#007bff',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '20px',
+  cursor: 'pointer',
+};
+
+//Ask about the concept of sending this request back to content?

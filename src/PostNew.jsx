@@ -10,6 +10,7 @@ export function PostNew(props) {
       console.log(response.data);
     })
     window.location.href = "/contributions"
+    
 
   }
   return(
