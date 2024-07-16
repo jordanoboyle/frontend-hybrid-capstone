@@ -7,7 +7,7 @@ import axios from "axios"
 
 export function UserProfile (props) {
   const [favoritePosts, setFavoritePosts] = useState([])
-  const [postToRead, setPostToRead] = useState({})
+  const [postToRead, setPostToRead] = useState({})  //superflous code for now(looking to do a show modal again)
   console.log("Props in UserProfile",props);
 
   const getUserInformation = () => {
@@ -23,8 +23,15 @@ export function UserProfile (props) {
 
 
   const handleUnfavoritePost = (event) => {
-    const valueId = event.currentTarget.getAttribute("data-value");
-    console.log("From handleUnfavoritePost",valueId);  
+    const fpID = event.currentTarget.getAttribute("data-value");
+    console.log("From handleUnfavoritePost", fpID);
+    
+    axios.delete(`http://localhost:3000/favorite_posts/${fpID}.json`)
+    .then(response => {
+      console.log(response.data)
+
+      window.location.href = "/userprofile"
+    })
     //Place Axios Request here to eliminate favorite post from the list, revert to user page (refresh)
   }
 
