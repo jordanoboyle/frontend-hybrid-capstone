@@ -9,10 +9,9 @@ export function FAQIndex(props) {
 
   return(
     <div>
-      <button>Button</button>
-      Frequently Asked Questions:
+      <h1>Frequently Asked Questions:</h1>
       {props.faqs.map((q) => 
-      <div>
+      <div key={q.id}>
         <h1 style={{fontSize: "1em", fontWeight: "bold"}}>Question: {q.question} </h1> 
         <p>Game: {q.game_title}</p>
         <p>Genre: {q.genre.name}</p>

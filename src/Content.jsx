@@ -5,6 +5,7 @@ import { PostShow } from "./PostShow"
 import { PostNew } from "./PostNew"
 import { PostUpdate } from "./PostUpdate"
 import { FAQIndex } from "./FAQIndex"
+import { ReviewIndex } from "./ReviewIndex"
 import { Signup } from "./SignUp"
 import { Login } from "./Login"
 import { LogoutLink } from "./LogoutLink"
@@ -22,18 +23,19 @@ export function Content() {
   const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState({})
   const [faqs, setFaqs] = useState([])
+  const [reviews, setReviews] = useState([])
   const [systemData, setSystemData] = useState([])
   const [genreData, setGenreData] = useState([])
 
-  // //User Data via UserContext and useContext hook
-  // const {currentUser} = useContext(UserContext)
+  //User Data via UserContext and useContext hook
+  const {currentUser} = useContext(UserContext)
   // console.log("from CONTENT", currentUser)
 
   //## Posts Related
   const handleIndexPosts = () => {
     console.log("getting the posts");
     axios.get("http://localhost:3000/posts.json").then(response => {
-      console.log(response.data);
+      console.log("POSTS", response.data);
       setPosts(response.data);
     })
     .catch(error => {
@@ -75,7 +77,7 @@ export function Content() {
   const handleIndexFAQs = () => {
     console.log("getting the FAQs");
     axios.get("http://localhost:3000/faqs.json").then(response => {
-      console.log(response.data);
+      console.log("FAQS", response.data);
       setFaqs(response.data);
     })
     .catch(error => {
@@ -85,6 +87,17 @@ export function Content() {
   // console.log("This is FAQ Data", faqs)
   
 
+  //## Review Related
+  const handleIndexReviews = () => {
+    console.log("getting the REVIEWS");
+    axios.get("http://localhost:3000/reviews.json").then(response => {
+      console.log( "REVIEWS",response.data);
+      setReviews(response.data);
+    })
+    .catch(error => {
+      console.error("There was an error fetching the Reviews!", error);
+    });
+  }
 
   //Build system data request here (prop pass)
   const getSystemData = () => {
@@ -120,9 +133,8 @@ export function Content() {
   useEffect(getSystemData, []);
   useEffect(getGenreData, []);
   useEffect(handleIndexFAQs, [])
-  //User Data via UserContext and useContext hook
-  const {currentUser} = useContext(UserContext)
-  console.log("from CONTENT", currentUser)
+  useEffect(handleIndexReviews, [])
+ 
 
 
 
@@ -130,7 +142,7 @@ export function Content() {
     <main>
         <h1>The Platonic Platypus</h1>
         <p>{currentUser && currentUser.first_name}</p>
-        <a href="/post/new">NewPost</a> | <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>
+        <a href="/post/new">NewPost</a> | <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a>
       <Routes>
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login />} />
@@ -141,6 +153,7 @@ export function Content() {
           onShowUpdatePost={handleShowPostUpdateModal}/> 
           } />
         <Route path="/indexFaqs" element={<FAQIndex faqs={faqs}/>} />
+        <Route path="/indexReviews" element={<ReviewIndex reviews={reviews} />} />
         <Route path="/userprofile" element={<UserProfile user={currentUser}/>} />
       </Routes>
       {/* <UserProfile user={currentUser}/> */}
