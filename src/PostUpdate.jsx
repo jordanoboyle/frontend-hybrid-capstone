@@ -12,7 +12,7 @@ export function PostUpdate(props) {
     axios.patch(`http://localhost:3000/posts/${props.post.id}.json`, params).then(response => {
       console.log(response.data);
 
-      window.location.href = "/"
+      window.location.href = "/userprofile"
     })
     .catch(error => {
       console.log('There was an error during the update.', error);

@@ -1,5 +1,7 @@
 import { useState, useContext, useEffect } from "react"
 import { UserContext, UserProvider } from "./UserContext"
+import { ModalPostUpdate } from "./ModalPostUpdate"
+import { PostUpdate } from "./PostUpdate"
 import axios from "axios"
 
 
@@ -11,7 +13,19 @@ export function UserProfile (props) {
   const [postToRead, setPostToRead] = useState({})  //superflous code for now(looking to do a show modal again)
   // console.log("Props in UserProfile", props.user);
   
+  const [currentPost, setCurrentPost] = useState({})
+  const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
  
+
+    //PostUpdate Modal form to update article
+    const handleShowPostUpdateModal = (post) => {
+      console.log("opening Post Update modal");
+      setIsPostUpdateVisible(true);
+      setCurrentPost(post);
+    }
+    const handleClosePostUpdateModal = () => {
+      setIsPostUpdateVisible(false);
+    }
   
   
   const getUserInformation = () => {
@@ -75,9 +89,16 @@ export function UserProfile (props) {
       {userPosts.map(up =>
         <div key={up.id}>
           <h3>{up.title}</h3>
-          <button>Edit Post</button> | <button> Delete This Post </button>
+          <h4>Game: {up.game_title ? up.game_title : "N/A"}</h4>
+          <h4>Genre: {up.genre ? up.genre.name : "N/A"}</h4>
+          <h4>System: {up.system ? up.system.name : "N/A"}</h4>
+          <button onClick={() => handleShowPostUpdateModal(up)}>Edit/Delete Post</button> 
+
         </div>
       )}
+      <ModalPostUpdate show={isPostUpdateVisible} onClose={handleClosePostUpdateModal}>
+        <PostUpdate post={currentPost}/>
+      </ModalPostUpdate>
     </div>
   )
 }

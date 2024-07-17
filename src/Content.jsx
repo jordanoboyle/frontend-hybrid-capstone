@@ -10,8 +10,7 @@ import { Signup } from "./SignUp"
 import { Login } from "./Login"
 import { UserProfile } from "./UserProfile"
 import { ModalPost } from "./ModalPost"
-import { ModalPostUpdate } from "./ModalPostUpdate"
-import { ModalFAQ } from "./ModalFAQ"
+// import { ModalPostUpdate } from "./ModalPostUpdate"
 import { Routes, Route } from "react-router-dom"
 import { UserContext } from "./UserContext"
 
@@ -20,7 +19,7 @@ import { UserContext } from "./UserContext"
 export function Content() {
   const [posts, setPosts] = useState([])
   const [isPostShowVisible, setIsPostShowVisible] = useState(false);
-  const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
+  // const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState({})
   const [faqs, setFaqs] = useState([])
   const [reviews, setReviews] = useState([])
@@ -63,16 +62,6 @@ export function Content() {
     console.log("showing single post through modal");
     setIsPostShowVisible(true);
     setCurrentPost(post);
-  }
-
-  //PostUpdate Modal form to update article
-  const handleShowPostUpdateModal = (post) => {
-    console.log("opening Post Update modal");
-    setIsPostUpdateVisible(true);
-    setCurrentPost(post);
-  }
-  const handleClosePostUpdateModal = () => {
-    setIsPostUpdateVisible(false);
   }
   
   //##FAQ Related
@@ -154,7 +143,7 @@ export function Content() {
         <Route path="/postIndex" element={
           <PostsIndex posts={posts} 
           onShowPost={handleShowSinglePost} 
-          onShowUpdatePost={handleShowPostUpdateModal}/> 
+          /> 
           } />
         <Route path="/indexFaqs" element={<FAQIndex faqs={faqs}/>} />
         <Route path="/indexReviews" element={<ReviewIndex reviews={reviews} />} />
@@ -164,10 +153,6 @@ export function Content() {
       Think about this like html content
         <PostShow post={currentPost}/>
       </ModalPost>
-      <ModalPostUpdate show={isPostUpdateVisible} onClose={handleClosePostUpdateModal}>
-        <PostUpdate post={currentPost} onPostDelete={handleDeletePost}/>
-      </ModalPostUpdate>
-      <button></button>
       
     </main>
   )

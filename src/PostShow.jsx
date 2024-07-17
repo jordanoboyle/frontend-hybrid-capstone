@@ -24,6 +24,8 @@ export function PostShow(props) {
     })
   }
 
+
+  //This is where you will render comments
   return(
     <div>
       <h1> {props.post.game_title} </h1>
