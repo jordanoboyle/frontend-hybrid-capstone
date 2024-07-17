@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 
 export function PostsIndex(props) {
-  console.log(props.posts)
+  console.log("FROM POST INDEX", props.posts)
 
   function truncateText(text, maxlength) {
     if (text.length <= maxlength) {
