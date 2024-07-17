@@ -90,8 +90,8 @@ export function UserProfile (props) {
         <div key={up.id}>
           <h3>{up.title}</h3>
           <h4>Game: {up.game_title ? up.game_title : "N/A"}</h4>
-          <h4>Genre: {up.genre ? up.genre.name : "N/A"}</h4>
-          <h4>System: {up.system ? up.system.name : "N/A"}</h4>
+          {/* <h4>Genre: {up.genre ? up.genre.name : "N/A"}</h4>
+          <h4>System: {up.system ? up.system.name : "N/A"}</h4> */}
           <button onClick={() => handleShowPostUpdateModal(up)}>Edit/Delete Post</button> 
 
         </div>
