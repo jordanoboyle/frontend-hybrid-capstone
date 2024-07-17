@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { UserContext, UserProvider } from "./UserContext"
 import axios from "axios"
 
@@ -7,34 +7,45 @@ import axios from "axios"
 
 export function UserProfile (props) {
   const [favoritePosts, setFavoritePosts] = useState([])
+  const [userPosts, setUserPosts] = useState([])
   const [postToRead, setPostToRead] = useState({})  //superflous code for now(looking to do a show modal again)
-  console.log("Props in UserProfile",props);
-
+  // console.log("Props in UserProfile", props.user);
+  
+ 
+  
+  
   const getUserInformation = () => {
-  axios.get(`http://localhost:3000/users/${props.user.id}.json`)
-  .then(response => {
-    console.log(response.data);
-    setFavoritePosts(response.data.favorite_posts)
-  })
-  .catch(error => {
-    console.error("There was an error fetching the posts!", error);
-  });
-}
+    axios.get(`http://localhost:3000/users/${props.user.id}.json`)
+    .then(response => {
+      console.log(response.data);
+      setFavoritePosts(response.data.favorite_posts)
+      setUserPosts(response.data.posts) //Pulling double duty here
+    })
+    .catch(error => {
+      console.error("There was an error fetching the posts!", error);
+    });
+  }
 
-
+  
+  
   const handleUnfavoritePost = (event) => {
     const fpID = event.currentTarget.getAttribute("data-value");
     console.log("From handleUnfavoritePost", fpID);
     
     axios.delete(`http://localhost:3000/favorite_posts/${fpID}.json`)
     .then(response => {
-      console.log(response.data)
-
-      window.location.href = "/userprofile"
+      console.log(response.data);
+      window.location.href = "/userprofile";
+      
     })
-    //Place Axios Request here to eliminate favorite post from the list, revert to user page (refresh)
+    .catch(error => {
+      console.error("There was an error during unfavorite!", error);
+      alert("We could not remove your favorite tag at this time. Try again later.")
+    });
   }
-
+  
+  
+  useEffect(getUserInformation, [])
   
   return(
 
@@ -51,14 +62,22 @@ export function UserProfile (props) {
       </div>
       <hr/>
       <div>
-        <button onClick={getUserInformation}>Your Favorite Posts</button>
+        <h2 style={{textDecoration: "underline"}}>Favorited Blog Entries</h2>
         {favoritePosts.map(fp =>
           <div key={fp.post.id}>
              <p>{fp.post.title} </p>
-             <button onClick={handleUnfavoritePost} data-value={fp.id}>UnFavorite</button>
+             <button onClick={handleUnfavoritePost} data-value={fp.id}>Remove From Fav Catalogue</button>
+             <hr></hr>
           </div>
         )}
       </div>
+      <h2 style={{textDecoration: "underline"}}>Your Blog Contributions</h2>
+      {userPosts.map(up =>
+        <div key={up.id}>
+          <h3>{up.title}</h3>
+          <button>Edit Post</button> | <button> Delete This Post </button>
+        </div>
+      )}
     </div>
   )
 }

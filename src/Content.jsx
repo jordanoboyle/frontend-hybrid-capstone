@@ -11,6 +11,7 @@ import { Login } from "./Login"
 import { UserProfile } from "./UserProfile"
 import { ModalPost } from "./ModalPost"
 import { ModalPostUpdate } from "./ModalPostUpdate"
+import { ModalFAQ } from "./ModalFAQ"
 import { Routes, Route } from "react-router-dom"
 import { UserContext } from "./UserContext"
 
@@ -25,6 +26,8 @@ export function Content() {
   const [reviews, setReviews] = useState([])
   const [systemData, setSystemData] = useState([])
   const [genreData, setGenreData] = useState([])
+
+  const [isFAQShowVisible, setIsFAQShowVisible] = useState(false);
 
   //User Data via UserContext and useContext hook
   const {currentUser} = useContext(UserContext)
@@ -84,6 +87,8 @@ export function Content() {
     });
   }
   // console.log("This is FAQ Data", faqs)
+
+  //Faq modal read
   
 
   //## Review Related
@@ -162,6 +167,8 @@ export function Content() {
       <ModalPostUpdate show={isPostUpdateVisible} onClose={handleClosePostUpdateModal}>
         <PostUpdate post={currentPost} onPostDelete={handleDeletePost}/>
       </ModalPostUpdate>
+      <button></button>
+      
     </main>
   )
 }

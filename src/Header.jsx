@@ -5,7 +5,7 @@ import { UserContext } from "./UserContext"
 
 export function Header() {
   const {currentUser} = useContext(UserContext)
-  console.log("from header", currentUser)
+  // console.log("from header", currentUser)
 
   const HeaderFormat = () => {
     const isLoggedIn = currentUser && Object.keys(currentUser).length > 0
