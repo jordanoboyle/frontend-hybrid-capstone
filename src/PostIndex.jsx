@@ -16,10 +16,19 @@ export function PostsIndex(props) {
   return(
     <div>
       <h1>Articles From the Community</h1>
+        <p>Click <a href="/post/new">HERE</a> to contribute to the community blog.</p>
         {props.posts.map((post) =>
         <div key={post.id} >
           <p>{post.id}</p>  {/*for dev purposes only*/}
           <h1> {post.title} </h1>
+          <div style={{display: 'flex', gap: '10px' }}>
+            <img src={post.image_url_one} 
+            alt={'/public/DefaultImages/GameOver.jpg'}
+            style={{width: '300px', height: "300px" }}/> 
+            <img src={post.image_url_two} 
+            alt={'/public/DefaultImages/GameOver.jpg'}
+            style={{width: '300px', height: "300px" }}/>
+          </div>
           <h1> {post.game_title} </h1>
           <p> Genre: {post.genre ? post.genre.name : "No Genre Applied"}</p>
           <p>System: {post.system ? post.system.name : "No System Applied"}</p>

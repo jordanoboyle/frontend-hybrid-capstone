@@ -135,7 +135,7 @@ export function Content() {
     <main>
         <h1>The Platonic Platypus</h1>
         {/* <p>{currentUser && currentUser.first_name}</p> */}
-        <a href="/post/new">NewPost</a> | <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a>
+      <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a>
       <Routes>
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login />} />

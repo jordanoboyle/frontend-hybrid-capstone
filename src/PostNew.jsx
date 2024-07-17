@@ -4,6 +4,7 @@ import { UserContext } from "./UserContext";
 
 export function PostNew(props) {
   const {currentUser} = useContext(UserContext)
+  const isLoggedIn = currentUser && Object.keys(currentUser).length > 0
 
 
   const handlePostSubmit = (event) => {
@@ -14,9 +15,9 @@ export function PostNew(props) {
       console.log(response.data);
     })
     window.location.href = "/postIndex"
-    
-
   }
+
+  if (isLoggedIn) {
   return(
     <div>
       <p>{currentUser.last_name}</p>
@@ -53,4 +54,10 @@ export function PostNew(props) {
 
     </div>
   )
+} else {
+  return(
+    <p>We are so happy that you would like to contribute to our community blog! While we are happy to let you browse the different resources and articles provided here, we ask that you <a>SIGNUP</a> or <a>LOGIN</a> in order to contribute. This allows us to care for our contributors and yourself in equal measure. Thank you for your understanding. </p>
+  )
+}
+//Using promise structure or async/await in order to render this page with appropriate timing. 
 }
