@@ -108,14 +108,23 @@ export function Content() {
       console.error("There was an error fetching the Reviews!", error);
     });
   }
+  //Review Modal
+  const handleShowSingleReview = (review) => {
+    // console.log("FROM handleShowSingleReview DATA", review);
+    setIsReviewShowVisible(true);
+    setCurrentReview(review);
+  }
+  const handleCloseReviewShowModal = () => {
+    setIsReviewShowVisible(false)
+  }
 
   //Build system data request here (prop pass)
   const getSystemData = () => {
     console.log("getting System data");
     axios.get("http://localhost:3000/systems.json")
     .then(response => {
-      console.log(response.data)
-      setSystemData(response.data)
+      console.log(response.data);
+      setSystemData(response.data);
     })
     .catch(error => {
       console.error("There was an error retrieving Systems data", error)
@@ -166,7 +175,9 @@ export function Content() {
         <Route path="/indexFaqs" element={
           <FAQIndex faqs={faqs}
           onShowFaq={handleShowSingleFaq}/>} />
-        <Route path="/indexReviews" element={<ReviewIndex reviews={reviews} />} />
+        <Route path="/indexReviews" element={
+          <ReviewIndex reviews={reviews} 
+          onShowReview={handleShowSingleReview} />} />
         <Route path="/userprofile" element={<UserProfile user={currentUser}/>} />
       </Routes>
 
@@ -177,8 +188,8 @@ export function Content() {
       <ModalBasic show={isFaqShowVisible} onClose={handleCloseFaqShowModal} >
         <FAQShow faq={currentFaq} />
       </ModalBasic>
-      <ModalBasic show={isReviewShowVisible} >
-          <ReviewShow />
+      <ModalBasic show={isReviewShowVisible} onClose={handleCloseReviewShowModal} >
+          <ReviewShow review={currentReview} />
       </ModalBasic>
       
     </main>
