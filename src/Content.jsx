@@ -7,6 +7,7 @@ import { PostUpdate } from "./PostUpdate"
 import { FAQIndex } from "./FAQIndex"
 import { FAQShow } from "./FAQShow"
 import { ReviewIndex } from "./ReviewIndex"
+import { ReviewShow } from "./ReviewShow"
 import { Signup } from "./SignUp"
 import { Login } from "./Login"
 import { UserProfile } from "./UserProfile"
@@ -27,6 +28,8 @@ export function Content() {
   const [isFaqShowVisible, setIsFaqShowVisible] = useState(false);
 
   const [reviews, setReviews] = useState([])
+  const [currentReview, setCurrentReview] = useState({})
+  const [isReviewShowVisible, setIsReviewShowVisible] = useState(false)
 
   const [systemData, setSystemData] = useState([])
   const [genreData, setGenreData] = useState([])
@@ -81,7 +84,6 @@ export function Content() {
     });
   }
   // console.log("This is FAQ Data", faqs)
-
   //Faq modal read
   const handleShowSingleFaq = (faq) => {
     console.log("Showing the FAQ")
@@ -92,6 +94,7 @@ export function Content() {
   const handleCloseFaqShowModal = () => {
     setIsFaqShowVisible(false)
   }
+
   
 
   //## Review Related
@@ -148,8 +151,9 @@ export function Content() {
   return (
     <main>
         <h1>The Platonic Platypus</h1>
-        {/* <p>{currentUser && currentUser.first_name}</p> */}
+        {/* <p>{currentUser && currentUser.first_name}</p> */} {/*for dev testing*/}
       <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a>
+
       <Routes>
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login />} />
@@ -165,12 +169,16 @@ export function Content() {
         <Route path="/indexReviews" element={<ReviewIndex reviews={reviews} />} />
         <Route path="/userprofile" element={<UserProfile user={currentUser}/>} />
       </Routes>
+
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
       Think about this like html content
         <PostShow post={currentPost}/>
       </ModalPost>
       <ModalBasic show={isFaqShowVisible} onClose={handleCloseFaqShowModal} >
         <FAQShow faq={currentFaq} />
+      </ModalBasic>
+      <ModalBasic show={isReviewShowVisible} >
+          <ReviewShow />
       </ModalBasic>
       
     </main>

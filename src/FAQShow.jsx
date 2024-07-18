@@ -3,7 +3,7 @@ import axios from "axios"
 import { UserContext } from "./UserContext"
 
 export function FAQShow(props) {
-  console.log("FROM FAQ MODAL", props.faq)
+  // console.log("FROM FAQ MODAL", props.faq)
 
 
 
