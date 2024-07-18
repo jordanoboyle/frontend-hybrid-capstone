@@ -21,7 +21,7 @@ export function ReviewIndex(props) {
           <p>{rev.subtitle}</p>
           <p>{truncateText(rev.body, 200)}</p>
           <strong>Author: {rev.user.first_name + " " + rev.user.last_name}</strong>
-          <p><button>Read Article</button></p>
+          <p><button onClick={() => props.onShowReview(rev)} >Read Article</button></p>
           <hr/>
           
         </div>  
