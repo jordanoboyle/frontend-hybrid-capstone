@@ -5,12 +5,13 @@ import { PostShow } from "./PostShow"
 import { PostNew } from "./PostNew"
 import { PostUpdate } from "./PostUpdate"
 import { FAQIndex } from "./FAQIndex"
+import { FAQShow } from "./FAQShow"
 import { ReviewIndex } from "./ReviewIndex"
 import { Signup } from "./SignUp"
 import { Login } from "./Login"
 import { UserProfile } from "./UserProfile"
 import { ModalPost } from "./ModalPost"
-// import { ModalPostUpdate } from "./ModalPostUpdate"
+import { ModalBasic } from "./ModalBasic"
 import { Routes, Route } from "react-router-dom"
 import { UserContext } from "./UserContext"
 
@@ -18,19 +19,23 @@ import { UserContext } from "./UserContext"
 
 export function Content() {
   const [posts, setPosts] = useState([])
-  const [isPostShowVisible, setIsPostShowVisible] = useState(false);
-  // const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState({})
+  const [isPostShowVisible, setIsPostShowVisible] = useState(false);
+
   const [faqs, setFaqs] = useState([])
+  const [currentFaq, setCurrentFaq] = useState({})
+  const [isFaqShowVisible, setIsFaqShowVisible] = useState(false);
+
   const [reviews, setReviews] = useState([])
+
   const [systemData, setSystemData] = useState([])
   const [genreData, setGenreData] = useState([])
 
-  const [isFAQShowVisible, setIsFAQShowVisible] = useState(false);
+  
 
   //User Data via UserContext and useContext hook
   const {currentUser} = useContext(UserContext)
-  // console.log("from CONTENT", currentUser)
+  // console.log("from CONTENT", currentUser)  //##For DEV TESTING ONLY
 
   //## Posts Related
   const handleIndexPosts = () => {
@@ -54,14 +59,14 @@ export function Content() {
   }
 
   //PostShow Modal read article
-  const handleClosePostShowModal = () => {
-    console.log("closing modal");
-    setIsPostShowVisible(false)
-  }
   const handleShowSinglePost = (post) => {
     console.log("showing single post through modal");
     setIsPostShowVisible(true);
     setCurrentPost(post);
+  }
+  const handleClosePostShowModal = () => {
+    console.log("closing modal");
+    setIsPostShowVisible(false)
   }
   
   //##FAQ Related
@@ -78,6 +83,15 @@ export function Content() {
   // console.log("This is FAQ Data", faqs)
 
   //Faq modal read
+  const handleShowSingleFaq = (faq) => {
+    console.log("Showing the FAQ")
+    console.log(faq)
+    setIsFaqShowVisible(true);
+    setCurrentFaq(faq);
+  }
+  const handleCloseFaqShowModal = () => {
+    setIsFaqShowVisible(false)
+  }
   
 
   //## Review Related
@@ -145,7 +159,9 @@ export function Content() {
           onShowPost={handleShowSinglePost} 
           /> 
           } />
-        <Route path="/indexFaqs" element={<FAQIndex faqs={faqs}/>} />
+        <Route path="/indexFaqs" element={
+          <FAQIndex faqs={faqs}
+          onShowFaq={handleShowSingleFaq}/>} />
         <Route path="/indexReviews" element={<ReviewIndex reviews={reviews} />} />
         <Route path="/userprofile" element={<UserProfile user={currentUser}/>} />
       </Routes>
@@ -153,6 +169,9 @@ export function Content() {
       Think about this like html content
         <PostShow post={currentPost}/>
       </ModalPost>
+      <ModalBasic show={isFaqShowVisible} onClose={handleCloseFaqShowModal} >
+        <FAQShow faq={currentFaq} />
+      </ModalBasic>
       
     </main>
   )

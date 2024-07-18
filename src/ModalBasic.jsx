@@ -1,6 +1,6 @@
-import "./ModalPost.css";
+import "./ModalBasic.css";
 
-export function ModalPost(props) {
+export function ModalBasic(props) {
   if (props.show) {
     return(
       <div className="modal-background">

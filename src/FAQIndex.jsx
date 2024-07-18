@@ -19,9 +19,9 @@ export function FAQIndex(props) {
         <p>Details: {q.description}</p>
         <p>Author: {q.user.first_name + " " + q.user.last_name}</p>
         <p> PlatonicTag: {q.user.username}</p>
-        
-        <button>Update FAQ (author only)</button> {/*Maybe restrict this to user page?*/}
-        <button>Delete FAQ (author only)</button>
+        <button onClick={() => props.onShowFaq(q)} >See Question Detail</button>
+        {/* <button>Update FAQ (author only)</button> {/*Maybe restrict this to user page?*/}
+        {/* <button>Delete FAQ (author only)</button> */}
         <hr/>
 
       </div>

@@ -96,6 +96,9 @@ export function UserProfile (props) {
 
         </div>
       )}
+      <h1>YOUR FAQ SECTION</h1>
+      <img style={{width: "500px", height: "500px"}} src={"/public/DefaultImages/UnderConstruction.png"}/>
+
       <ModalPostUpdate show={isPostUpdateVisible} onClose={handleClosePostUpdateModal}>
         <PostUpdate post={currentPost}/>
       </ModalPostUpdate>
