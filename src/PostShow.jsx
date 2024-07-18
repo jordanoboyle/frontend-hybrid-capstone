@@ -7,6 +7,7 @@ import { UserContext } from "./UserContext"
 export function PostShow(props) {
   const [error, setError] = useState('')
   const {currentUser} = useContext(UserContext);
+  const [postComments, setPostComments] = useState([])
   // console.log("USER DATA in modal", currentUser);
 
   const handleFavoritingPost = (event) => {
@@ -22,7 +23,13 @@ export function PostShow(props) {
       console.log("There was an error adding to favorites", error);
       setError("There was an error on adding to favorites. Please try again later.")
     })
+  } 
+
+  const handleGettingPostComments = () => {
+    console.log("getting PostComments");
+    setPostComments(props.post.post_comments);
   }
+  
 
 
   //This is where you will render comments
@@ -40,6 +47,8 @@ export function PostShow(props) {
           {error}
         </div>
       )}
+      <br></br>
+      <button style={buttonStyle} onClick={handleGettingPostComments}>View Comments</button>
     </div>
   )
 }
