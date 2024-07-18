@@ -23,10 +23,10 @@ export function PostsIndex(props) {
           <h1> {post.title} </h1>
           <div style={{display: 'flex', gap: '10px' }}>
             <img src={post.image_url_one} 
-            alt={'/public/DefaultImages/GameOver.jpg'}
+            alt='/public/DefaultImages/GameOver.jpg'
             style={{width: '300px', height: "300px" }}/> 
             <img src={post.image_url_two} 
-            alt={'/public/DefaultImages/GameOver.jpg'}
+            alt='/public/DefaultImages/GameOver.jpg'
             style={{width: '300px', height: "300px" }}/>
           </div>
           <h1> {post.game_title} </h1>
