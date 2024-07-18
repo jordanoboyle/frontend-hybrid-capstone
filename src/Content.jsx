@@ -185,9 +185,11 @@ export function Content() {
       Think about this like html content
         <PostShow post={currentPost}/>
       </ModalPost>
+
       <ModalBasic show={isFaqShowVisible} onClose={handleCloseFaqShowModal} >
         <FAQShow faq={currentFaq} />
       </ModalBasic>
+      
       <ModalBasic show={isReviewShowVisible} onClose={handleCloseReviewShowModal} >
           <ReviewShow review={currentReview} />
       </ModalBasic>

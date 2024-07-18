@@ -10,22 +10,21 @@ import axios from "axios"
 export function UserProfile (props) {
   const [favoritePosts, setFavoritePosts] = useState([])
   const [userPosts, setUserPosts] = useState([])
-  const [postToRead, setPostToRead] = useState({})  //superflous code for now(looking to do a show modal again)
   // console.log("Props in UserProfile", props.user);
   
   const [currentPost, setCurrentPost] = useState({})
   const [isPostUpdateVisible, setIsPostUpdateVisible] = useState(false);
  
 
-    //PostUpdate Modal form to update article
-    const handleShowPostUpdateModal = (post) => {
-      console.log("opening Post Update modal");
-      setIsPostUpdateVisible(true);
-      setCurrentPost(post);
-    }
-    const handleClosePostUpdateModal = () => {
-      setIsPostUpdateVisible(false);
-    }
+  //PostUpdate Modal form to update article
+  const handleShowPostUpdateModal = (post) => {
+    console.log("opening Post Update modal");
+    setIsPostUpdateVisible(true);
+    setCurrentPost(post);
+  }
+  const handleClosePostUpdateModal = () => {
+    setIsPostUpdateVisible(false);
+  }
   
   
   const getUserInformation = () => {
