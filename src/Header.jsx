@@ -1,6 +1,10 @@
 import { LogoutLink } from "./LogoutLink"
 import { useContext } from "react"
 import { UserContext } from "./UserContext"
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 export function Header() {
@@ -11,15 +15,55 @@ export function Header() {
     const isLoggedIn = currentUser && Object.keys(currentUser).length > 0
     if (isLoggedIn) {
       return(
-        <nav>
-          <a href="/">Home</a> | <a href="/contributions">All Blogs, FAQs, Reviews</a> | <a href="/userprofile">{currentUser.first_name}'s Profile Page</a> | <LogoutLink />
-        </nav>
+        <Navbar expand="lg" className="bg-body-tertiary">
+          <Container>
+            <Navbar.Brand href="/">Platypus Lounge (Home)</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/userprofile">{currentUser.first_name}'s Profile Page</Nav.Link>
+                <Nav.Link > {<LogoutLink />} </Nav.Link>
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">
+                    Separated link
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       )
     } else {
       return(
-        <nav>
-          <a href="/">Home</a> | <a href="/contributions">All Blogs, FAQs, Reviews</a> | <a href="/signup">Signup</a> | <a href="/login">Login</a>
-        </nav>
+        <Navbar expand="lg" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="/">Platypus Lounge (Home)</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/signup">SIGNUP</Nav.Link>
+              <Nav.Link href="/login"> LOGIN </Nav.Link>
+              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       )
     }
   }
@@ -31,10 +75,3 @@ export function Header() {
   )
 }
 
-// return (
-//   <header>
-//     <nav>
-//       <a href="/">Home</a> | <a href="/contributions">All Blogs, FAQs, Reviews</a> | <a href="/signup">Signup</a> | <a href="/login">Login</a> | <LogoutLink />
-//     </nav>
-//   </header>
-// )
