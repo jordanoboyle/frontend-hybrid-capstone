@@ -22,13 +22,11 @@ export function Header() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link href="/userprofile">{currentUser.first_name}'s Profile Page</Nav.Link>
-                <Nav.Link > {<LogoutLink />} </Nav.Link>
+                <Nav.Link as={LogoutLink}> LOGOUT  </Nav.Link>
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                  <NavDropdown.Item href="/postIndex">Community Blog</NavDropdown.Item>
+                  <NavDropdown.Item href="/indexFaqs">Community FAQs</NavDropdown.Item>
+                  <NavDropdown.Item href="/indexReviews">Community Reviews</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">
                     Separated link
@@ -50,12 +48,10 @@ export function Header() {
               <Nav.Link href="/signup">SIGNUP</Nav.Link>
               <Nav.Link href="/login"> LOGIN </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
+              <NavDropdown.Item href="/postIndex">Community Blog</NavDropdown.Item>
+              <NavDropdown.Item href="/indexFaqs">Community FAQs</NavDropdown.Item>
+              <NavDropdown.Item href="/indexReviews">Community Reviews</NavDropdown.Item>
+              <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item>
