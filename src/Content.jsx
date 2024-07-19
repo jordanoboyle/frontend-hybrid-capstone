@@ -13,8 +13,10 @@ import { Login } from "./Login"
 import { UserProfile } from "./UserProfile"
 import { ModalPost } from "./ModalPost"
 import { ModalBasic } from "./ModalBasic"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { UserContext } from "./UserContext"
+
+import { HomePage } from "./HomePage"
 
 
 
@@ -159,11 +161,12 @@ export function Content() {
 
   return (
     <main>
-        <h1>The Platonic Platypus</h1>
-        {/* <p>{currentUser && currentUser.first_name}</p> */} {/*for dev testing*/}
-      <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a>
+      {/* <h1>The Platonic Platypus</h1>
+      <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a> */}
 
       <Routes>
+        <Route path="/" element={<Navigate to="/home"/>}  />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/post/new" element={<PostNew />} />
