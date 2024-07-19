@@ -24,10 +24,10 @@ export function PostShow(props) {
       setError("There was an error on adding to favorites. Please try again later.")
     })
   } 
-
   const handleGettingPostComments = () => {
-    console.log("getting PostComments");
+    console.log("getting PostComments", props.post.post_comments);
     setPostComments(props.post.post_comments);
+    console.log("DEV TEST PROPS", postComments)
   }
   
 
@@ -49,6 +49,16 @@ export function PostShow(props) {
       )}
       <br></br>
       <button style={buttonStyle} onClick={handleGettingPostComments}>View Comments</button>
+      <div  style={commentSection}>
+      {postComments.map((comment) => 
+        <div  key={comment.id}>
+          <div style={soloComment}>
+            <p> <img style={{width: "2em", height: "2em"}} src={comment.user.prof_image} /> || <strong>Platonic Tag: {comment.user.username}</strong></p>
+            <p>{comment.body}</p>
+          </div>
+        </div> 
+      )}
+      </div>
     </div>
   )
 }
@@ -64,4 +74,20 @@ const buttonStyle = {
   cursor: 'pointer',
 };
 
+const commentSection = {
+  marginTop: "2em",
+  maxHeight: '25vh',
+  maxWidth: '90%',
+  backgroundColor: '#3f3f3f',
+  overflowY: 'scroll',
+  borderRadius: "2em"
+};
+
+const soloComment = {
+  padding: '2%',
+  margin: '2%',
+  backgroundColor: '#ffffff',
+  color: 'black',
+  borderRadius: '2em', // Optional: adds rounded corners
+};
 //Ask about the concept of sending this request back to content?
