@@ -16,23 +16,16 @@
 .modal-main {
   background-color: #fff;
   border-radius: 15px;
-  /* Rounded corners */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  /* Subtle shadow */
-  width: 80vw;
-  /* Responsive width */
-  height: 80vh;
+  width: 90%;
   max-width: 1200px;
-  /* Maximum width for the modal */
-  max-height: 80%;
-  /* Maximum height for the modal */
-  overflow-y: auto;
-  /* Enable vertical scrolling */
   padding: 20px;
-  /* Padding inside the modal */
   position: relative;
-  /* For positioning the close button */
+  overflow-y: auto;
+  transition: height 0.3s ease, max-height 0.3s ease;
+  /* Add transition for smooth resizing */
 }
+
 
 .close {
   position: absolute;

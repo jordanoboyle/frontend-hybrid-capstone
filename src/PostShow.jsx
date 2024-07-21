@@ -6,6 +6,7 @@ import { UserContext } from "./UserContext"
 
 export function PostShow(props) {
   const [error, setError] = useState('')
+  const [commentError, setCommentError] = useState('')
   const {currentUser} = useContext(UserContext);
   const [postComments, setPostComments] = useState([])
   // console.log("USER DATA in modal", currentUser);
@@ -28,6 +29,24 @@ export function PostShow(props) {
     console.log("getting PostComments", props.post.post_comments);
     setPostComments(props.post.post_comments);
     console.log("DEV TEST PROPS", postComments)
+  }
+
+  const handleSubmitComment = (event) => {
+    event.preventDefault();
+    console.log("Submitting the comment!");
+    let params = new FormData(event.target);
+    for (let [key, value] of params.entries()) {
+      console.log(key, value)
+    }
+    // axios.post(`http://localhost:3000/post_comments.json`, params)
+    // .then(response => {
+    //   console.log("SUCCESS", response.data);
+    // })
+    // .catch(error => {
+    //   console.log("There was a error submitting comment", error);
+    //   setCommentError("There was an error on submission. Try again later.")
+    // })
+    event.target.reset();
   }
   
 
@@ -61,6 +80,15 @@ export function PostShow(props) {
         </div> 
       )}
       </div>
+      <form onSubmit={handleSubmitComment}>
+        <div>
+          <input type="hidden" name="user_id" value={currentUser.id}/>
+          <input type="hidden" name="post_id" value={props.post.id}/>
+          <p><label>Add Comment Here:</label></p>
+          <textarea name="body" type="text" ></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   )
 }
