@@ -46,6 +46,7 @@ export function PostsIndex(props) {
                     </ListGroup.Item>
                     <ListGroup.Item>PlatonicTag: {post.user.username}</ListGroup.Item>
                     <ListGroup.Item>GAME LINK HERE?</ListGroup.Item>
+                    <sub>Thinking about adding 3rd party API function here</sub>
                   </ListGroup>
                   <Card.Body>
                     <div className="d-grid gap-2">

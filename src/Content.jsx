@@ -185,7 +185,6 @@ export function Content() {
       </Routes>
 
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>
-      Think about this like html content
         <PostShow post={currentPost}/>
       </ModalPost>
 

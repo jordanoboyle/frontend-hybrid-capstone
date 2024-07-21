@@ -38,7 +38,9 @@ export function PostShow(props) {
       <h1> {props.post.game_title} </h1>
       <p> Genre: {props.post.genre ? props.post.genre.name : "No Genre Applied"}</p>
       <p>System: {props.post.system ? props.post.system.name : "No System Applied"}</p>
-      <p> {props.post.body}</p>  {/*Body text truncated for visual purposes*/}
+      <div style={bodyStyle}>
+        <p> {props.post.body}</p>  
+      </div>
       <p>Author: {props.post.user.first_name + " " + props.post.user.last_name}</p>
       <p> PlatonicTag: {props.post.user.username}</p>
       <button style={buttonStyle} onClick={handleFavoritingPost} data-value={props.post.id}>Add To Your Favorites</button>
@@ -63,6 +65,15 @@ export function PostShow(props) {
   )
 }
 
+const bodyStyle = {
+  maxHeight: '60vh', // Adjust based on your needs
+  overflowY: 'auto',
+  border: '1px solid #ccc',
+  padding: '10px',
+  borderRadius: '10px',
+  marginTop: '10px'
+};
+
 const buttonStyle = {
   padding: '10px 20px',
   paddingTop: "10px",
@@ -76,7 +87,7 @@ const buttonStyle = {
 
 const commentSection = {
   marginTop: "2em",
-  maxHeight: '25vh',
+  maxHeight: '40vh',
   maxWidth: '90%',
   backgroundColor: '#3f3f3f',
   overflowY: 'scroll',
