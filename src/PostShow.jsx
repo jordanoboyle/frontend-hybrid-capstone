@@ -38,14 +38,14 @@ export function PostShow(props) {
     for (let [key, value] of params.entries()) {
       console.log(key, value)
     }
-    // axios.post(`http://localhost:3000/post_comments.json`, params)
-    // .then(response => {
-    //   console.log("SUCCESS", response.data);
-    // })
-    // .catch(error => {
-    //   console.log("There was a error submitting comment", error);
-    //   setCommentError("There was an error on submission. Try again later.")
-    // })
+    axios.post(`http://localhost:3000/post_comments.json`, params)
+    .then(response => {
+      console.log("SUCCESS", response.data);
+    })
+    .catch(error => {
+      console.log("There was a error submitting comment", error);
+      setCommentError("There was an error on submission. Try again later.")
+    })
     event.target.reset();
   }
   
@@ -84,10 +84,13 @@ export function PostShow(props) {
         <div>
           <input type="hidden" name="user_id" value={currentUser.id}/>
           <input type="hidden" name="post_id" value={props.post.id}/>
-          <p><label>Add Comment Here:</label></p>
-          <textarea name="body" type="text" ></textarea>
+          <p>
+            <label>Add Comment Here:</label>
+          </p>
+          <textarea name="body" type="text" style={commentAreaStyle}>  
+          </textarea>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" style={buttonStyle}>Submit</button>
       </form>
     </div>
   )
@@ -128,5 +131,13 @@ const soloComment = {
   backgroundColor: '#ffffff',
   color: 'black',
   borderRadius: '2em', // Optional: adds rounded corners
+};
+const commentAreaStyle = {
+  maxHeight: '60vh', // Adjust based on your needs
+  overflowY: 'auto',
+  border: '1px solid #ccc',
+  padding: '10px',
+  borderRadius: '10px',
+  marginTop: '10px'
 };
 //Ask about the concept of sending this request back to content?
