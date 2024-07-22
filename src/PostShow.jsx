@@ -12,10 +12,10 @@ export function PostShow(props) {
   // console.log("USER DATA in modal", currentUser);
 
   const handleFavoritingPost = (event) => {
-    console.log("favorite this specific post");
+    console.log("Favorite Post");
     const pID = event.currentTarget.getAttribute("data-value");
 
-    console.log("from FAV BUTTON", pID, currentUser)
+    console.log("FAV BUTTON", pID, currentUser)
     axios.post("http://localhost:3000/favorite_posts.json", {user_id: currentUser.id, post_id: pID})
     .then(response => {
       console.log("Post Request Confirm", response.data)
@@ -26,18 +26,17 @@ export function PostShow(props) {
     })
   } 
   const handleGettingPostComments = () => {
-    console.log("getting PostComments", props.post.post_comments);
+    console.log("Fetching Comments", props.post.post_comments);
     setPostComments(props.post.post_comments);
-    console.log("DEV TEST PROPS", postComments)
   }
 
   const handleSubmitComment = (event) => {
     event.preventDefault();
     console.log("Submitting the comment!");
     let params = new FormData(event.target);
-    for (let [key, value] of params.entries()) {
-      console.log(key, value)
-    }
+    // for (let [key, value] of params.entries()) {
+    //   console.log(key, value)
+    // }
     axios.post(`http://localhost:3000/post_comments.json`, params)
     .then(response => {
       console.log("SUCCESS", response.data);
@@ -90,7 +89,9 @@ export function PostShow(props) {
           <textarea name="body" type="text" style={commentAreaStyle}>  
           </textarea>
         </div>
-        <button type="submit" style={buttonStyle}>Submit</button>
+        <button type="submit" style={buttonStyle} required>
+          Submit
+        </button>
       </form>
     </div>
   )
@@ -134,6 +135,7 @@ const soloComment = {
 };
 const commentAreaStyle = {
   maxHeight: '60vh', // Adjust based on your needs
+  width: '90%',
   overflowY: 'auto',
   border: '1px solid #ccc',
   padding: '10px',

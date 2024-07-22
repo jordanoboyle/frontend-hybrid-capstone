@@ -1,6 +1,9 @@
 import axios from "axios";
+import './index.css';
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
+import Form from 'react-bootstrap/Form';
+import { Button } from "react-bootstrap";
 
 export function PostNew(props) {
   const {currentUser} = useContext(UserContext)
@@ -20,38 +23,41 @@ export function PostNew(props) {
   if (isLoggedIn) {
   return(
     <div>
-      <p>{currentUser.last_name}</p>
-      <h1>
+      <h1 style={headerStyle}>
         Want to write about something? We have you covered!
       </h1>
-      <p>(functional needs routing and more intricate work)</p>
-      <form onSubmit={handlePostSubmit}>
+      <Form onSubmit={handlePostSubmit}>
         <input name="user_id" type="hidden" value={currentUser.id}/>
-        <div>
-          Article Title:
-          <input name="title" type="text"/>
-        </div>
-        <div>
-          Game Title (not required):
-          <input name="game_title" type="text"/>
-        </div>
-        <div>
-          Genre Select:
-          <input name="genre_id" type="integer" defaultValue={undefined}/>
-          <sub>NOT A REQUIRED FIELD</sub>
-        </div>
-        <div>
-          System Select:
-          <input name="system_id" type="integer" defaultValue={undefined}/>
-          <sub>NOT A REQUIRED FIELD</sub>
-        </div>
-        <div>
-          Write Your Article Here:
-          <input name="body" type="text"/>
-        </div>
-        <button>Post Your Article</button>
-      </form>
-
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Article Title:</Form.Label>
+          <Form.Control name="title" type="string" placeholder="Your Article Title" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Game Title:</Form.Label>
+          <Form.Control name="game_title" type="string" placeholder="Not Required" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Genre Select:</Form.Label>
+          <Form.Control 
+          name="genre_id" 
+          type="integer" 
+          defaultValue={undefined} 
+          placeholder="DROP DOWN COMING SOON"/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>System Select:</Form.Label>
+          <Form.Control 
+          name="system_id" 
+          type="integer" 
+          defaultValue={undefined} 
+          placeholder="DROP DOWN COMING SOON"/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Example textarea</Form.Label>
+          <Form.Control as="textarea" rows={10} name="body" type="text"/>
+        </Form.Group>
+        <Button variant="info" type="submit">Submit Article</Button>
+      </Form>
     </div>
   )
 } else {
@@ -61,3 +67,17 @@ export function PostNew(props) {
 }
 //Using promise structure or async/await in order to render this page with appropriate timing. 
 }
+
+const headerStyle = {
+  fontFamily: "'Press Start 2P', cursive",
+  color: '#fff',
+  backgroundColor: '#000',
+  padding: '20px',
+  border: '5px solid #00ff00',
+  borderRadius: '10px',
+  textAlign: 'center',
+  textTransform: 'uppercase',
+  boxShadow: '0 0 10px rgba(0, 255, 0, 0.7)',
+  width: 'fit-content',
+  margin: '20px auto',
+};

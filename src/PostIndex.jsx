@@ -30,8 +30,7 @@ export function PostsIndex(props) {
         {props.posts.map((post) =>
             <Col key={post.id}>
               <Card style={{ width: '18rem'}} >
-                  <Card.Img variant="top" src={post.image_url_one} 
-                  alt='/public/DefaultImages/GameOver.jpg' 
+                  <Card.Img variant="top" src={post.image_url_one ? post.image_url_one : '/public/DefaultImages/GameOver.jpg'} 
                   style={cardImage}/>
                   <Card.Body>
                     <Card.Text>{post.id}</Card.Text> {/*for dev purposes only*/}
@@ -74,55 +73,6 @@ const cardImage = {
 
 
 
-function HorizontalExample() {
-  return (
-    <Stack direction="horizontal" gap={3}>
-       {props.posts.map((post) =>
-        <div key={post.id} >
-          <p>{post.id}</p>  {/*for dev purposes only*/}
-          <h1> {post.title} </h1>
-          <div style={{display: 'flex', gap: '10px' }}>
-            <img src={post.image_url_one} 
-            alt='/public/DefaultImages/GameOver.jpg'
-            style={{width: '300px', height: "300px" }}/> 
-            <img src={post.image_url_two} 
-            alt='/public/DefaultImages/GameOver.jpg'
-            style={{width: '300px', height: "300px" }}/>
-          </div>
-          <h1> {post.game_title} </h1>
-          <p> Genre: {post.genre ? post.genre.name : "No Genre Applied"}</p>
-          <p>System: {post.system ? post.system.name : "No System Applied"}</p>
-          <p> {truncateText(post.body, 150)}</p>  {/*Body text truncated for visual purposes*/}
-          <p>Author: {post.user.first_name + " " + post.user.last_name}</p>
-          <p> PlatonicTag: {post.user.username}</p>
-          <p><button onClick={() => props.onShowPost(post)}> Read Article</button> </p>
-          <hr/>
-        </div>
-      )}
-    </Stack>
-  );
-}
 
 
-// {props.posts.map((post) =>
-//   <div key={post.id} >
-//     <p>{post.id}</p>  {/*for dev purposes only*/}
-//     <h1> {post.title} </h1>
-//     <div style={{display: 'flex', gap: '10px' }}>
-//       <img src={post.image_url_one} 
-//       alt='/public/DefaultImages/GameOver.jpg'
-//       style={{width: '300px', height: "300px" }}/> 
-//       <img src={post.image_url_two} 
-//       alt='/public/DefaultImages/GameOver.jpg'
-//       style={{width: '300px', height: "300px" }}/>
-//     </div>
-//     <h1> {post.game_title} </h1>
-//     <p> Genre: {post.genre ? post.genre.name : "No Genre Applied"}</p>
-//     <p>System: {post.system ? post.system.name : "No System Applied"}</p>
-//     <p> {truncateText(post.body, 150)}</p>  {/*Body text truncated for visual purposes*/}
-//     <p>Author: {post.user.first_name + " " + post.user.last_name}</p>
-//     <p> PlatonicTag: {post.user.username}</p>
-//     <p><button onClick={() => props.onShowPost(post)}> Read Article</button> </p>
-//     <hr/>
-//   </div>
-// )}
+
