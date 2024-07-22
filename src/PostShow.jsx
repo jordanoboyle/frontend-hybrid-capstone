@@ -21,10 +21,11 @@ export function PostShow(props) {
       console.log("Post Request Confirm", response.data)
     })
     .catch(error => {
-      console.log("There was an error adding to favorites", error);
+      console.error("There was an error adding to favorites", error);
       setError("There was an error on adding to favorites. Please try again later.")
     })
   } 
+
   const handleGettingPostComments = (event) => {
     const pID = event.currentTarget.getAttribute("data-value");
 
@@ -33,8 +34,13 @@ export function PostShow(props) {
       console.log("COMMENTS", response.data);
       setPostComments(response.data)
     })
+    .catch(error => {
+      console.error("There was an error adding to favorites", error);
+      setError("There was an error on adding to favorites. Please try again later.")
+    })
     
   }
+
   const closeCommentsSection = () => {
     setPostComments([])
   }
@@ -52,7 +58,7 @@ export function PostShow(props) {
       setPostComments([...postComments], response.data)
     })
     .catch(error => {
-      console.log("There was a error submitting comment", error);
+      console.error("There was a error submitting comment", error);
       setCommentError("There was an error on submission. Try again later.")
     })
     event.target.reset();

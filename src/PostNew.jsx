@@ -53,7 +53,7 @@ export function PostNew(props) {
           placeholder="DROP DOWN COMING SOON"/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Example textarea</Form.Label>
+          <Form.Label>Write Article Here</Form.Label>
           <Form.Control as="textarea" rows={10} name="body" type="text"/>
         </Form.Group>
         <Button variant="info" type="submit">Submit Article</Button>
@@ -62,7 +62,7 @@ export function PostNew(props) {
   )
 } else {
   return(
-    <p>We are so happy that you would like to contribute to our community blog! While we are happy to let you browse the different resources and articles provided here, we ask that you <a>SIGNUP</a> or <a>LOGIN</a> in order to contribute. This allows us to care for our contributors and yourself in equal measure. Thank you for your understanding. </p>
+    <p style={headerStyle}>We are so happy that you would like to contribute to our community blog! While we are happy to let you browse the different resources and articles provided here, we ask that you <a href="/signup">SIGNUP</a> or <a href="/login">LOGIN</a> in order to contribute. This allows us to care for our contributors and yourself in equal measure. Thank you for your understanding. </p>
   )
 }
 //Using promise structure or async/await in order to render this page with appropriate timing. 

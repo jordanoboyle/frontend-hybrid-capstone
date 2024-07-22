@@ -53,7 +53,8 @@ export function Content() {
       console.error("There was an error fetching the posts!", error);
     });
   }
-  //Delete Blog Post
+  
+  //Delete Blog Post (deprecated I think...)
   const handleDeletePost = (post_id) => {
     console.log("receiving delete request");
     axios.delete(`http://localhost:3000/posts/14.json`).then(response => {
@@ -159,9 +160,7 @@ export function Content() {
 
   return (
     <main>
-      {/* <h1>The Platonic Platypus</h1>
-      <a href="/postIndex">Blog Index</a> |  <a href="/indexFaqs">FAQ Index</a>  |  <a href="indexReviews">Reviews</a> */}
-
+ 
       <Routes>
         <Route path="/" element={<Navigate to="/home"/>}  />
         <Route path="/home" element={<HomePage />} />
@@ -179,7 +178,7 @@ export function Content() {
         <Route path="/indexReviews" element={
           <ReviewIndex reviews={reviews} 
           onShowReview={handleShowSingleReview} />} />
-        <Route path="/userprofile" element={<UserProfile user={currentUser}/>} />
+        <Route path="/userprofile" element={<UserProfile user={currentUser} />} />
       </Routes>
 
       <ModalPost show={isPostShowVisible} onClose={handleClosePostShowModal}>

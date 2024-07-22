@@ -3,16 +3,17 @@ import { useState } from "react";
 
 
 export function PostUpdate(props) {
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
 
   const handlingSubmitPostUpdate = (event) => {
     event.preventDefault();
-    console.log("Update article/blog post from modal")
-    let params = new FormData(event.target) 
+    console.log("Update article/blog post from modal");
+    let params = new FormData(event.target); 
     axios.patch(`http://localhost:3000/posts/${props.post.id}.json`, params).then(response => {
       console.log(response.data);
 
-      window.location.href = "/userprofile"
+      window.location.href = "/userprofile";
     })
     .catch(error => {
       console.log('There was an error during the update.', error);
@@ -20,10 +21,19 @@ export function PostUpdate(props) {
     })
   }
   // console.log(props.post) //For purposes of seeing data structures
-  const handlingPostDelete = () => {
-    event.preventDefault();
+  const handlingPostDelete = (pID) => {
     console.log("sending destroy post request");
-    props.onPostDelete(props.post.id); //post.id passed in props to handlePostDelete in Content
+    // props.onPostDelete(props.post.id); //post.id passed in props to handlePostDelete in Content
+    axios.delete(`http://localhost:3000/posts/${pID}.json`)
+    .then(response => {
+      console.log(response.data)
+      window.location.href = "/userprofile";
+    })
+    .catch(error => {
+      console.error("There was an error during delete", error);
+      setDeleteError("Encountered error during delete. Please try again later.");
+    })
+
   }
 
   return (
@@ -50,8 +60,13 @@ export function PostUpdate(props) {
         </div>
       )}
       <div style={formStyle}>
-        <button style={buttonStyle} onClick={handlingPostDelete}>Remove Article</button>
+        <button style={buttonStyle} onClick={() => handlingPostDelete(props.post.id)}>Remove Article</button>
       </div>
+      {deleteError && (
+        <div style={{ color: 'red' }}>
+          {deleteError}
+        </div>
+      )}
     </div>
   );
 };
