@@ -5,7 +5,7 @@ import axios from "axios";
 
 export function FAQIndex(props) {
   console.log(props.faqs)
-  //call faq_comments, loop beneath the divs of faq render
+
 
   return(
     <div>

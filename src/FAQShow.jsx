@@ -5,8 +5,6 @@ import { UserContext } from "./UserContext"
 export function FAQShow(props) {
   // console.log("FROM FAQ MODAL", props.faq)
 
-
-
   return(
     <div>
       <h1>This will be from the FAQ Modal</h1>

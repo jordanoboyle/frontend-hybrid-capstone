@@ -85,11 +85,10 @@ export function Content() {
       console.error("There was an error fetching the faqs!", error);
     });
   }
-  // console.log("This is FAQ Data", faqs)
+ 
   //Faq modal read
   const handleShowSingleFaq = (faq) => {
-    console.log("Showing the FAQ")
-    console.log(faq)
+    console.log("Showing the FAQ", faq)
     setIsFaqShowVisible(true);
     setCurrentFaq(faq);
   }
@@ -112,7 +111,6 @@ export function Content() {
   }
   //Review Modal
   const handleShowSingleReview = (review) => {
-    // console.log("FROM handleShowSingleReview DATA", review);
     setIsReviewShowVisible(true);
     setCurrentReview(review);
   }
@@ -132,7 +130,7 @@ export function Content() {
       console.error("There was an error retrieving Systems data", error)
     })
   }
-  // console.log("System Data Verification", systemData)
+
 
   //Build genre data request here (prop pass)
   const getGenreData = () => {
@@ -146,7 +144,7 @@ export function Content() {
       console.error("There was an error retrieving Genres data", error)
     })
   }
-  // console.log("Genre Data Verification", genreData)
+  
 
 
   

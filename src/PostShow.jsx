@@ -25,9 +25,15 @@ export function PostShow(props) {
       setError("There was an error on adding to favorites. Please try again later.")
     })
   } 
-  const handleGettingPostComments = () => {
-    console.log("Fetching Comments", props.post.post_comments);
-    setPostComments(props.post.post_comments);
+  const handleGettingPostComments = (event) => {
+    const pID = event.currentTarget.getAttribute("data-value");
+
+    axios.get("http://localhost:3000/post_comments.json", {params: {post_id: pID}})
+    .then(response => {
+      console.log("COMMENTS", response.data);
+      setPostComments(response.data)
+    })
+    
   }
   const closeCommentsSection = () => {
     setPostComments([])
@@ -74,7 +80,7 @@ export function PostShow(props) {
       <br></br>
       <button 
       style={buttonStyle} 
-      onClick={handleGettingPostComments}>
+      onClick={handleGettingPostComments} data-value={props.post.id}>
         View Comments
       </button>
       <button 

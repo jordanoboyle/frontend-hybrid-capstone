@@ -23,4 +23,3 @@ export function HomePage() {
   )
 }
 
-{/* <Button variant="secondary">Blog</Button> */}
