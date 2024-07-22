@@ -24,6 +24,7 @@ export function HomePage() {
            Reviews
           </Button>
         </div>
+        <p>Image by Raoul Stolzlechner from Pixabay</p>
       </div>
     </div>
   )
@@ -36,7 +37,8 @@ const outerContainerStyle = {
   justifyContent: "center",
   alignItems: 'center',
   height: '100vh',
-  backgroundImage: 'url(/public/DefaultImages/BGImage.jpeg)', 
+  width: '100vw',
+  backgroundImage: 'url(/public/DefaultImages/BGimg.jpg)', 
   backgroundSize: 'cover',
   backgroundPosition: 'center'
 }
@@ -55,7 +57,7 @@ const buttonStyle = {
   color: 'white',
   border: 'none',
   padding: '2em 2em',
-  fontSize: '1em',
+  fontSize: '3em',
   margin: '10px 0',
   borderRadius: '5px',
   width: '40%',
