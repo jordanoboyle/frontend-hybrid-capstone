@@ -29,6 +29,9 @@ export function PostShow(props) {
     console.log("Fetching Comments", props.post.post_comments);
     setPostComments(props.post.post_comments);
   }
+  const closeCommentsSection = () => {
+    setPostComments([])
+  }
 
   const handleSubmitComment = (event) => {
     event.preventDefault();
@@ -40,6 +43,7 @@ export function PostShow(props) {
     axios.post(`http://localhost:3000/post_comments.json`, params)
     .then(response => {
       console.log("SUCCESS", response.data);
+      setPostComments([...postComments], response.data)
     })
     .catch(error => {
       console.log("There was a error submitting comment", error);
@@ -68,7 +72,15 @@ export function PostShow(props) {
         </div>
       )}
       <br></br>
-      <button style={buttonStyle} onClick={handleGettingPostComments}>View Comments</button>
+      <button 
+      style={buttonStyle} 
+      onClick={handleGettingPostComments}>
+        View Comments
+      </button>
+      <button 
+      onClick={closeCommentsSection} style={buttonStyle}>
+        Close Comments
+      </button>
       <div  style={commentSection}>
       {postComments.map((comment) => 
         <div  key={comment.id}>
